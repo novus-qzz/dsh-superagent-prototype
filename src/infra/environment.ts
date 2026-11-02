@@ -139,7 +139,10 @@ export async function verifyEnvironment(deployment: Pick<Deployment, 'github' | 
   const { github, stateDir } = deployment
   // `-z` separates fields with NUL and never quotes paths.
   const helpers = (await runAsWorker(subprocess, ['git', 'config', '-z', '--show-origin', '--get-all', 'credential.https://github.com.helper'], stateDir, AbortSignal.any([signal, AbortSignal.timeout(60_000)])).catch(() => '')).split('\0')
-  if (helpers.join('\0') !== [`file:${workerGitConfig(stateDir)}`, credentialHelper(github.cli), ''].join('\0')) throw new SetupError('gitTooOld')
+  // Windows adaptation: git reports origins with forward slashes while path.join yields backslashes; compare normalized.
+  const norm = (value: string): string => value.replaceAll('\\', '/')
+  const [origin = '', helper = '', tail = ''] = helpers
+  if (norm(origin) !== `file:${norm(workerGitConfig(stateDir))}` || helper !== credentialHelper(github.cli) || tail !== '') throw new SetupError('gitTooOld')
 }
 
 /**
