@@ -1,3 +1,6 @@
+> **Fork notice**: Forked from [`deepseek-ai/dsh-superagent-prototype`](https://github.com/deepseek-ai/dsh-superagent-prototype). This is not an official DeepSeek product; the upstream repository is the canonical source and may change ahead of this fork.
+>
+> This fork is kept as a reference for autonomous agent tooling on Windows — tool-calling reliability, sandbox boundaries, context/token budgets, and local-first workflows. Attribution remains with the upstream authors; see [LICENSE](LICENSE) and upstream docs for original material.
 # dsh-superagent
 
 > **Research prototype for reference only, not an official DeepSeek product.** This code grew out of our team's day-to-day development work, with much of the engineering done by coding agents. Treat it as research code, not production-ready software. It may still contain bugs, and its coding style and engineering practices may be inconsistent. Review and adapt it before using it in your own environment.
@@ -37,3 +40,4 @@ Read the numbered documents in order; each builds only on the ones before it.
 ## License
 
 [MIT](LICENSE)
+
